@@ -12,7 +12,6 @@ export const addNewAssistance = async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        console.log(error);
         if (error instanceof BadRequest)
             return res.status(error.statusCode).json({ message: error.message });
         else
@@ -29,8 +28,7 @@ export const getAssistanceWithDetail = async (req: Request, res: Response) => {
         });
 
     } catch (error) {
-        console.log(error);
-        if (error instanceof BadRequest)
+       if (error instanceof BadRequest)
             return res.status(error.statusCode).json({ message: error.message });
         else
             return res.status(500).json({ message: error });

@@ -43,7 +43,6 @@ class NewAssistanceComponent extends React.Component {
 			.then((response) => {
 				if (response.data.success === false)
 					Report.warning('Could not load user data', 'Please try again later');
-				console.log(response.data.data);
 				this.setState({ name: response.data.data.Name + ' ' + response.data.data.LastName });
 				this.setState({ email: response.data.data.Email });
 			}).catch((error) => {
