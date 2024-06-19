@@ -51,15 +51,40 @@ _Se tienen descuento del tipo:_
 4. La aplicación estará disponible en `http://localhost:3000/`.
 
 #### Despliegue
-La aplicación se encuentra desplegada en la nube de AWS, pero se puede acceder a ella a través de la siguiente URL: [Disagro Medical](http://technical-env.eba-2mz2jz2m.us-east-1.elasticbeanstalk.com/)
+La aplicación se encuentra desplegada en la nube de AWS, pero se puede acceder a ella a través de la siguiente URL: [Disagro Medical](http://3.86.40.29/login)
 
 1. Para desplegar se debe connectar al servidor de AWS por ssh.
 2. Dirigirse a la carpeta `/var/app/` y clonar el repositorio.
 3. Ejecutar el comando `docker-compose up -d` para levantar los contenedores.
 4. La aplicación estará disponible en el puerto 80.
 
-### Demo 💻
+Usuarios de prueba:
+| Email                         | Pass       |
+|-------------------------------|------------|
+| john.doe@example.com          | password1  |
+| jane.smith@example.com        | password2  |
+| michael.johnson@example.com   | password3  |
+| emily.williams@example.com    | password4  |
+| james.brown@example.com       | password5  |
+| emma.jones@example.com        | password6  |
+| daniel.garcia@example.com     | password7  |
+| olivia.martinez@example.com   | password8  |
+| william.hernandez@example.com | password9  |
+| sophia.lopez@example.com      | password10 |
 
+
+### Demo 💻
+Login de Usuario:
+![image01](assets/image.png)
+
+Agendar asistencia:
+![image02](assets/image2.png)
+
+Detalle de asistencia:
+![image03](assets/image3.png)
+
+Asistencias planificadas:
+![image04](assets/image4.png)
 
 ### Seguridad
 
