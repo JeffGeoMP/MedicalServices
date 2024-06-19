@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS Promotions (
 CREATE TABLE IF NOT EXISTS Assistance (
     IdAssistance INT NOT NULL AUTO_INCREMENT,
     IdUser INT NOT NULL,
-    Date DATE NOT NULL,
+    Date DATETIME NOT NULL,
     Total DOUBLE NOT NULL,
     DiscountServices INT NOT NULL,
     DiscountProducts INT NOT NULL,

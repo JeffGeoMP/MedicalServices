@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { getConnection } from '../databse/connector';
 import { User } from '../interface/user';
 import { BadRequest } from '../util/badRequest';
-import { generateTokenJWT } from '../auth/auth.methods';
+import { generateTokenJWT, verifyTokenJWT } from '../auth/auth.methods';
 
 const secretKey = 'DISAGROTEST';
 
@@ -21,4 +21,9 @@ export async function generateToken(email: string, password: string): Promise<st
 
     const token = generateTokenJWT(data[0]);
     return token;
+}
+
+export function getDataUserFromToken(token: string): User {
+    let data: User = verifyTokenJWT(token) as User;
+    return data;
 }

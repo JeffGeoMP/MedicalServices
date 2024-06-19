@@ -4,7 +4,7 @@ import { User } from '../interface/user';
 const secretKey = 'DISAGROTEST';
 
 export function generateTokenJWT(data: User): string {   
-    const token = jwt.sign(data , secretKey, { expiresIn: '1h' });
+    const token = jwt.sign(data , secretKey, { expiresIn: '8h' });
     return token;
 }
 
