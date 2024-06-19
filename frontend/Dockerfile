@@ -2,11 +2,9 @@ FROM node:18 AS build
 
 WORKDIR /app
 COPY package*.json ./
+COPY .env.prod .env
 RUN npm install
 COPY . .
-
-ARG REACT_APP_KEY
-ARG REACT_APP_SERVICES_URL
 
 RUN npm run build
 

@@ -13,9 +13,6 @@ services:
       context: ./frontend
     ports:
       - "80:80"
-    environment:
-      - REACT_APP_KEY=6473dbe0-e691-4a1d-ada9-af7bf12afc2c
-      - REACT_APP_SERVICES_URL=http://backend
     networks:
       - disagro-medical-network
 networks:
