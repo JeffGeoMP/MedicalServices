@@ -86,6 +86,9 @@ Detalle de asistencia:
 Asistencias planificadas:
 ![image04](assets/image4.png)
 
+Pagina para paginas no encontradas:
+![image05](image5.png)
+
 ### Seguridad
 
 Se implemento seguridad en el backend con un JSONWEBTOKEN, para poder acceder a los endpoints se debe enviar un token de autenticación en el header de la petición.
