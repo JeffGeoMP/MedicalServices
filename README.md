@@ -87,7 +87,7 @@ Asistencias planificadas:
 ![image04](assets/image4.png)
 
 Pagina para paginas no encontradas:
-![image05](image5.png)
+![image05](assets/image5.png)
 
 ### Seguridad
 
