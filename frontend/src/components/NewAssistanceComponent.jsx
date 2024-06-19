@@ -1,14 +1,18 @@
 import React from "react";
 import AssistanceService from "../services/assistanceService";
+import LoginService from "../services/loginService";
 import { Loading, Report } from "notiflix";
 
 class NewAssistanceComponent extends React.Component {
 
 	assistanceService = new AssistanceService();
+	loginService = new LoginService();
 
 	constructor(props) {
 		super(props);
 		this.state = {
+			name : '',
+			email : '',
 			date: '',
 			promotions: [],
 			promotionsSelected: [],
@@ -28,6 +32,20 @@ class NewAssistanceComponent extends React.Component {
 				if (response.data.success === false)
 					Report.warning('Could not load promotions', 'Please try again later');
 				this.setState({ promotions: response.data.data });
+			}).catch((error) => {
+				Report.failure('Error', error.message);
+			}).finally(() => {
+				Loading.remove();
+			});
+
+		Loading.pulse('Loading Data ...');
+		this.loginService.getDataUser()
+			.then((response) => {
+				if (response.data.success === false)
+					Report.warning('Could not load user data', 'Please try again later');
+				console.log(response.data.data);
+				this.setState({ name: response.data.data.Name + ' ' + response.data.data.LastName });
+				this.setState({ email: response.data.data.Email });
 			}).catch((error) => {
 				Report.failure('Error', error.message);
 			}).finally(() => {
@@ -100,12 +118,13 @@ class NewAssistanceComponent extends React.Component {
 			.then((response) => {
 				if (response.data.success === false)
 					Report.warning('Could not send assistance', 'Please try again later');
-				Report.success('Assistance sent', 'Assistance sent successfully');
+				Report.success('Assistance sent', `Assistance sent successfully, verify your email ${this.state.email} for more information`, 'Ok', () => {
+					window.location.reload();
+				});
 			}).catch((error) => {
 				Report.failure('Error', error.message);
 			}).finally(() => {
 				Loading.remove();
-				window.location = '/assistance';
 			});
 	}
 
@@ -113,7 +132,7 @@ class NewAssistanceComponent extends React.Component {
 		return (
 			<div>
 				<h2>New Assistance</h2>
-				<span className="mt-3">Choose the date and time of your attendance and the products and/or services you are interested in.</span>
+				<span className="mt-3">Welcome {this.state.name}, choose the date and time of your attendance and the products and/or services you are interested in.</span>
 
 
 				<div className="mt-5 col-md-4 offset-md-4">
