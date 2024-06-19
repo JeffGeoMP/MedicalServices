@@ -105,6 +105,7 @@ class NewAssistanceComponent extends React.Component {
 				Report.failure('Error', error.message);
 			}).finally(() => {
 				Loading.remove();
+				window.location = '/assistance';
 			});
 	}
 

@@ -58,9 +58,13 @@ async function addAssistanceDetailDB(idAssistance: number, promotions: Promotion
 
 async function addAssistanceDB(promotions: Promotions[], idUser: number, date: Date, db : any): Promise<number> {
     let total = promotions.reduce((total, promotion) => total + promotion.Price, 0);
-    let discountServices = getDiscountServices(promotions) 
-    let discountProducts = getDiscountProducts(promotions) ;
-    let totalDiscount = total - (total * (discountProducts + discountServices) / 100);
+    let discountServices = getPercentDiscuount(promotions, 'S') 
+    let discountProducts = getPercentDiscuount(promotions, 'P') ;
+
+    let totalDiscountServices = getTotalByType(promotions, 'S') * (discountServices / 100);
+    let totalDiscountProducts = getTotalByType(promotions, 'P') * (discountProducts / 100);
+
+    let totalDiscount = (totalDiscountServices + totalDiscountProducts).toFixed(2);
 
     let query = 'INSERT INTO Assistance (IdUser, Date, Total, DiscountServices, DiscountProducts, TotalDiscount) VALUES (?, ?, ?, ?, ?, ?)';
     const [result] : [any] = await db.query(query, [idUser, date, total, discountServices, discountProducts, totalDiscount]);
@@ -68,27 +72,20 @@ async function addAssistanceDB(promotions: Promotions[], idUser: number, date: D
     return result.insertId;
 }
 
-function getDiscountServices(promotions: Promotions[]): number {
-    let services = promotions.filter(promotion => promotion.Type === 'S'); 
-    let total = services.reduce((total, service) => total + service.Price, 0);
+function getPercentDiscuount(promotions: Promotions[], type:string): number {
+    let promotion = promotions.filter(promotion => promotion.Type === type); 
+    let total = promotion.reduce((total, promotion) => total + promotion.Price, 0);
 
-    if(services.length >= 2 && total >= 1500)
+    if(promotion.length >= 2 && total >= 1500)
         return 5;
-    if(services.length >= 2 )
+    if(promotion.length >= 2 )
         return 3;
 
     return 0;
 }
 
-function getDiscountProducts(promotions: Promotions[]): number {
-    let services = promotions.filter(promotion => promotion.Type === 'P'); 
-    let total = services.reduce((total, service) => total + service.Price, 0);
-
-    if(services.length >= 2 && total >= 1500)
-        return 5;
-    if(services.length >= 2 )
-        return 3;
-
-    return 0;
+function getTotalByType (promotions : Promotions[], type : string) : number {
+    let filterType = promotions.filter(promotion => promotion.Type === type);
+    let total = filterType.reduce((total, promotion) => total + promotion.Price, 0);
+    return total;
 }
-

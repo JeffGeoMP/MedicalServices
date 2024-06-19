@@ -1,5 +1,6 @@
 import axios from "axios";
 import environment from "../helpers/environment";
+import authenticate from "../auth/authenticate";
 
 class LoginService {
 
@@ -13,6 +14,19 @@ class LoginService {
             },
             headers: {
                 "Content-Type": "application/json",
+            },
+            timeout: 10000
+        });
+    }
+
+    getDataUser = () => {
+        return axios({
+            method: "GET",
+            url: `${environment.servicesUrl}/login/data`,
+            data: null,
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${authenticate.getToken()}`
             },
             timeout: 10000
         });
